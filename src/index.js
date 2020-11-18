@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import StockModel from "./StockModel.js";
 
 const model= new StockModel();
+//npconst store = createStore(stockReducer);
 
 ReactDOM.render(
   <React.StrictMode>
