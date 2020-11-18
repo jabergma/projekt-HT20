@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "../StockModel.js";
 
-function useModelProp(model, prop) {
+export default function useModelProp(model, prop) {
   // ordinary func, not component!
-  const [propValue, setPropValue] = React.useState(model[prop]);
-  React.useEffect(
+  const [propValue, setPropValue] = useState(model[prop]);
+  useEffect(
     function () {
       const obs = () => setPropValue(model[prop]);
       model.addObserver(obs);

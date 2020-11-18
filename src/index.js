@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import "./StockModel.js";
+import StockModel from "./StockModel.js";
 
+const model= new StockModel();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <App model={model}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

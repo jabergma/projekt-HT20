@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import "./presenter/home.js";
-import "./StockModel.js";
+import Home from "./presenter/home.js";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -23,9 +22,8 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-const model= new StockModel();
 
-function App() {
+function App({model}) {
   const [user] = useAuthState(auth);
   return (
     <div className="App">
@@ -36,6 +34,7 @@ function App() {
     </div>
   );
 }
+
 
 function SignIn(){
   const signInWithGoogle = ()=> {
@@ -52,10 +51,5 @@ function SignOut() {
     <button onClick={()=> auth.signOut()}>Sign Out</button>
   )
 }
-
-function Test() {
-  return SignOut();
-}
-
 
 export default App;

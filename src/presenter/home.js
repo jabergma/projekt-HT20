@@ -1,13 +1,10 @@
 import React from "react";
-import "../views/HomeView.js";
-import "./useModelProp.js";
+import HomeView from "../views/HomeView.js";
+import useModelProp from "./useModelProp.js";
 
-function Home({model}) {
-    const usrMoney= useModelProp(model, "usrMoney");
+export default function Home({model}) {
+    const usrMoney= model.getUsrMoney();
 
   
-    return (HomeView, {
-      usrMoney: usrMoney
-      
-    });
+    return <HomeView usrMoney={usrMoney}/>
   }

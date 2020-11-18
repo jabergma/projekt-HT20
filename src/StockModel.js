@@ -1,4 +1,4 @@
-class StockModel {
+export default class StockModel {
     constructor() {
       this.usrMoney = 1000;
       this.subscribers = [];

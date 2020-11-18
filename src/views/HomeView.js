@@ -1,5 +1,5 @@
-const HomeView = ({usrMoney}) => (
-    <div>
-   SÅ HÄR MYCKET PENGAR HAR DU!!!!!!! {usrMoney}
-    </div>
-          )
+import React from "react";
+
+export default function HomeView({ usrMoney }) {
+  return <div>SÅ HÄR MYCKET PENGAR HAR DU!!!!!!! {usrMoney} </div>;
+}
