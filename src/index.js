@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import StockModel from "./StockModel.js";
+import { Provider } from 'react-redux';
+import {store} from "./redux/store";
 
-const model= new StockModel();
-//npconst store = createStore(stockReducer);
+//const model= new StockModel();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App model={model}/>
+    <Provider store = {store}><App /></Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

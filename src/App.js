@@ -8,11 +8,11 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import DetailsView from "./views/DetailsView";
+import { useSelector, useDispatch } from "react-redux";
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyBT4r_JoMcQodd1N30Bf6eZnlOmXNgeiR0",
@@ -28,7 +28,7 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-function App({ model }) {
+function App() {
   const [user] = useAuthState(auth);
   return (
     <div className="App">
@@ -47,7 +47,7 @@ function App({ model }) {
         <Switch>
           <Route path="/home">
             <section className="Main">
-              {user ? <Home model={model} /> : <SignIn />}
+              <Home/>
             </section>
           </Route>
           <Route path="/details">
@@ -81,3 +81,4 @@ function SignOut() {
 }
 
 export default App;
+//{user ? <Home /> : <SignIn />}
