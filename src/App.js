@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import "./presenter/home.js";
+import "./StockModel.js";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -21,7 +23,7 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-
+const model= new StockModel();
 
 function App() {
   const [user] = useAuthState(auth);
@@ -29,7 +31,7 @@ function App() {
     <div className="App">
       <header></header>
       <section>
-        {user ? <Test /> : <SignIn />}
+        {user ? <Home model={model}/> : <SignIn />}
       </section>
     </div>
   );
