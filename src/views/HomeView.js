@@ -28,11 +28,7 @@ function SignIn() {
   return <button onClick={signInWithGoogle}>Sign In With Google</button>;
 }
 
-function SignOut() {
-  return (
-    auth.currentUser && <button onClick={() => auth.signOut()}>Sign Out</button>
-  );
-}
+
 
 
 function UserBalance() {
