@@ -1,10 +1,11 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
-import firebase from "firebase/app";
-import "firebase/auth";
+import { firestore, auth } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
-export default function NavigationView() {
+export default function NavigationView({ balance }) {
+  const [user] = useAuthState(auth);
   return (
     <Navbar fixed="top" bg="dark" variant="dark">
       <Navbar.Brand href="home">Stockify</Navbar.Brand>
@@ -18,8 +19,20 @@ export default function NavigationView() {
         </Form>
       </Nav>
       <Nav>
-        <Nav.Link href="home"> Logout </Nav.Link>
+        <Navbar.Text>
+          Signed in as User <br />
+          Balance: {UserBalance()}$
+        </Navbar.Text>
+        <Nav.Link href="home" onClick={() => auth.signOut()}>
+          {" "}
+          Logout{" "}
+        </Nav.Link>
       </Nav>
     </Navbar>
   );
+}
+
+function UserBalance() {
+  const balansref = firestore.collection("users");
+  const [balans] = useCollectionData(balansref, { idField: "id" });
 }
