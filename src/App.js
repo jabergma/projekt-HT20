@@ -27,7 +27,7 @@ function App() {
             crossorigin="anonymous"
           />
         </header>
-        
+        {user ? (
           <section>
             <Navigation />
             <Switch>
@@ -48,28 +48,27 @@ function App() {
               </Route>
             </Switch>
           </section>
-        
+        ) : (
+          <section>
+            <Switch>
+              <Route path="/home">
+              <section className="Main">
+                <Login />
+              </section>
+              </Route>
+              <Route path="/register">
+                <section className="Main">
+                <Register/>
+                </section>
+              </Route>
+            </Switch>
+          </section>
+        )}
       </div>
     </Router>
   );
 }
 
 export default App;
-/*
-{user ? (
-) : (
-  <section>
-    <Switch>
-      <Route path="/home">
-      <section className="Main">
-        <Login />
-      </section>
-      </Route>
-      <Route path="/register">
-        <section className="Main">
-        <Register/>
-        </section>
-      </Route>
-    </Switch>
-  </section>
-)}*/
+
+
