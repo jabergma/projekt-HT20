@@ -13,63 +13,52 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useSelector, useDispatch } from "react-redux";
+import { Container } from "react-bootstrap";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const user = useSelector((state) => state.user);
+
   return (
     <Router>
-      <div className="App">
-        <header>
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-            crossorigin="anonymous"
-          />
-        </header>
-        
-          <section>
-            <Navigation />
-            <Switch>
-              <Route path="/home">
-                <section className="Main">
-                  <Home />
-                </section>
+      <div className="Main">
+        <header></header>
+
+        <Switch>
+          {user ? (
+            <>
+              <Navigation />
+              <Route exact path="/">
+                <Home />
               </Route>
               <Route path="/details">
-                <section className="Main">
-                  <Details />
-                </section>
+                <Details />
               </Route>
               <Route path="/your-stock">
-                <section className="Main">
-                  <Profile />
-                </section>
+                <Profile />
               </Route>
-            </Switch>
-          </section>
-        
+            </>
+          ) : (
+            <>
+              <Route exact path="/">
+                <Container className="loginContainer">
+                  <div className="w-100" style={{ maxWidth: "400px" }}>
+                    <Login />
+                  </div>
+                </Container>
+              </Route>
+              <Route path="/register">
+                <Container className="loginContainer">
+                  <div className="w-100" style={{ maxWidth: "400px" }}>
+                    <Register />
+                  </div>
+                </Container>
+              </Route>
+            </>
+          )}
+        </Switch>
       </div>
     </Router>
   );
 }
 
 export default App;
-/*
-{user ? (
-) : (
-  <section>
-    <Switch>
-      <Route path="/home">
-      <section className="Main">
-        <Login />
-      </section>
-      </Route>
-      <Route path="/register">
-        <section className="Main">
-        <Register/>
-        </section>
-      </Route>
-    </Switch>
-  </section>
-)}*/
