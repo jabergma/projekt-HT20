@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import firebase, { auth, db } from "../firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
+import firebase, { auth, firestore } from "../firebase.js";
 
-export default function LoginView({ setUser }) {
+export default function LoginView({ loginUser }) {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,7 +58,7 @@ export default function LoginView({ setUser }) {
   async function login(email, password) {
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      setUser("uid");
+      loginUser();
       history.push("/");
     } catch (error) {
       alert(error);

@@ -5,8 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
 
-export default function NavigationView({ balance }) {
-  const [user] = useAuthState(auth);
+export default function NavigationView({ balance, name }) {
   return (
     <Navbar fixed="top" bg="dark" variant="dark">
       <Link to="/">
@@ -29,8 +28,8 @@ export default function NavigationView({ balance }) {
       </Nav>
       <Nav>
         <Navbar.Text>
-          Signed in as User <br />
-          Balance: {UserBalance()}$
+          Signed in as {name} <br />
+          Balance: {balance}$
         </Navbar.Text>
         <Nav.Link href="/" onClick={() => auth.signOut()}>
           {" "}
@@ -39,9 +38,4 @@ export default function NavigationView({ balance }) {
       </Nav>
     </Navbar>
   );
-}
-
-function UserBalance() {
-  const balansref = firestore.collection("users");
-  const [balans] = useCollectionData(balansref, { idField: "id" });
 }

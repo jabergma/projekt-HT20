@@ -3,7 +3,7 @@ import { Form, Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import firebase, { auth, db } from "../firebase.js";
 
-export default function RegisterView({setUser}) {
+export default function RegisterView({setUser, setBalance, balance}) {
   const history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,7 +63,7 @@ export default function RegisterView({setUser}) {
 
   async function register(name, email, password) {
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      await auth.createUserWithEmailAndPassword(email, password)
       setUser("uid");
       history.push("/");
       return auth.currentUser.updateProfile({ displayName: name });
@@ -72,3 +72,7 @@ export default function RegisterView({setUser}) {
     }
   }
 }
+
+
+
+//.then(userCredential => firestore.collection('users').{userCredential}.user.uid, name)
