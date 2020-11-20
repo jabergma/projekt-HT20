@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { LOGIN } from "../redux/types.js";
 
 export default function Login() {
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (

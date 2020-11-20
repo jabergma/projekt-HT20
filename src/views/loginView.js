@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import firebase, { auth, db } from "../firebase.js";
-import {useAuthState} from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth";
 
-export default function LoginView({setUser}) {
-  const history = useHistory()
+export default function LoginView({ setUser }) {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   return (
     <>
       <Card className="bg-dark">
@@ -21,7 +21,7 @@ export default function LoginView({setUser}) {
                 type="email"
                 placeholder="Enter email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </Form.Group>
             <Form.Group>
@@ -30,14 +30,17 @@ export default function LoginView({setUser}) {
                 type="password"
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Group>
             <Button
               className="w-100"
               variant="primary"
               type="submit"
-              onClick={() => login(email, password)}
+              onClick={(event) => {
+                event.preventDefault();
+                login(email, password);
+              }}
             >
               Login
             </Button>
@@ -53,11 +56,11 @@ export default function LoginView({setUser}) {
     </>
   );
 
-  async function login() {
+  async function login(email, password) {
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      setUser("uid")
-      history.push("/")
+      setUser("uid");
+      history.push("/");
     } catch (error) {
       alert(error);
     }

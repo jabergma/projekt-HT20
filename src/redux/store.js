@@ -8,7 +8,7 @@ import fbConfig from "../firebase.js";
 import { BUY, SELL, LOGIN } from "./types.js";
 
 const initialState = {
-  user: "uid",
+  user: undefined,
   balance: 1000,
 };
 

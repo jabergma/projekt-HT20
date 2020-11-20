@@ -17,15 +17,16 @@ import { Container } from "react-bootstrap";
 
 function App() {
   const user = useSelector((state) => state.user);
-  
+
   return (
     <Router>
       <div className="Main">
         <header></header>
-        {user ? (
-          <section>
-            <Navigation />
-            <Switch>
+
+        <Switch>
+          {user ? (
+            <>
+              <Navigation />
               <Route exact path="/">
                 <Home />
               </Route>
@@ -35,12 +36,10 @@ function App() {
               <Route path="/your-stock">
                 <Profile />
               </Route>
-            </Switch>
-          </section>
-        ) : (
-          <>
-            <Switch>
-              <Route path="/login">
+            </>
+          ) : (
+            <>
+              <Route exact path="/">
                 <Container className="loginContainer">
                   <div className="w-100" style={{ maxWidth: "400px" }}>
                     <Login />
@@ -54,9 +53,9 @@ function App() {
                   </div>
                 </Container>
               </Route>
-            </Switch>
-          </>
-        )}
+            </>
+          )}
+        </Switch>
       </div>
     </Router>
   );
