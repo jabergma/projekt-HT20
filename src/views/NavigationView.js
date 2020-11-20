@@ -8,9 +8,9 @@ export default function NavigationView({ balance }) {
   const [user] = useAuthState(auth);
   return (
     <Navbar fixed="top" bg="dark" variant="dark">
-      <Navbar.Brand href="home">Stockify</Navbar.Brand>
+      <Navbar.Brand href="/">Stockify</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="home">Home</Nav.Link>
+        <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="details">Details</Nav.Link>
         <Nav.Link href="your-stock">Your stock</Nav.Link>
         <Form inline>
@@ -23,7 +23,7 @@ export default function NavigationView({ balance }) {
           Signed in as User <br />
           Balance: {UserBalance()}$
         </Navbar.Text>
-        <Nav.Link href="home" onClick={() => auth.signOut()}>
+        <Nav.Link href="/" onClick={() => auth.signOut()}>
           {" "}
           Logout{" "}
         </Nav.Link>

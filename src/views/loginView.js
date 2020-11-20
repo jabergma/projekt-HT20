@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import firebase, { auth, db } from "../firebase.js";
+import {useAuthState} from "react-firebase-hooks/auth"
 
-export default function LoginView() {
+export default function LoginView({setUser}) {
   const history = useHistory()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   return (
     <>
       <Card className="bg-dark">
@@ -54,6 +56,7 @@ export default function LoginView() {
   async function login() {
     try {
       await auth.signInWithEmailAndPassword(email, password);
+      setUser("uid")
       history.push("/")
     } catch (error) {
       alert(error);

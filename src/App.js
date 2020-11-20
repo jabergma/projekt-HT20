@@ -16,7 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container } from "react-bootstrap";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const user = useSelector((state) => state.user);
+  
   return (
     <Router>
       <div className="Main">
