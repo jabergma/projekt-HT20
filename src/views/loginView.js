@@ -1,44 +1,62 @@
 import React, { useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import firebase, {auth, db} from "../firebase.js"
+import { Form, Button, Container, Card } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import firebase, { auth, db } from "../firebase.js";
 
 export default function LoginView() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+  const history = useHistory()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
-    <Container>
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)}/>
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+    <>
+      <Card className="bg-dark">
+        <Card.Body>
+          <h2 className="loginHeader">Log In</h2>
+          <Form>
+            <Form.Group>
+              <Form.Label className="loginText">Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              className="w-100"
+              variant="primary"
+              type="submit"
+              onClick={() => login(email, password)}
+            >
+              Login
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        </Form.Group>
-        <Form.Group controlId="formBasicCheckbox"></Form.Group>
-        <Button variant="primary" type="submit" onClick={() => login()}>
-          Login
+      <Link to="/register">
+        <Button variant="primary" type="submit">
+          Register
         </Button>
-        <Link to="/register">
-          <Button variant="primary" type="submit">
-            Register
-          </Button>
-        </Link>
-      </Form>
-    </Container>
+      </Link>
+    </>
   );
 
-  async function login(){
-      try{
-          await auth.signInWithEmailAndPassword(email, password)
-      } catch(error){
-          alert(error.message)
-      }
+  async function login() {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      history.push("/")
+    } catch (error) {
+      alert(error);
+    }
   }
 }
