@@ -1,8 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import { firestore, auth } from "../firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Link } from "react-router-dom";
 
 export default function NavigationView({ balance, name }) {

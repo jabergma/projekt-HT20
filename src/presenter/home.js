@@ -7,5 +7,5 @@ export default function Home() {
   const balance = useSelector((state) => state.balance);
   const dispatch = useDispatch();
 
-  return <HomeView balance={balance} />;
+  return <HomeView balance={balance} currentStock={(symbol) => dispatch({type: "SETSTOCK", payload: symbol})} />;
 }
