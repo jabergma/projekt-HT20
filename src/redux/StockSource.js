@@ -15,4 +15,7 @@ export const StockSource = {
     getStockDailyDetails(symbol) {
       return this.apiCall("function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + symbol + "&apikey=");
     },
+    searchStock(keywords){
+      return this.apiCall("function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=")
+    }
   };

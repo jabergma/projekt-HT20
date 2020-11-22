@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import { firestore, auth } from "../firebase.js";
 import { Link } from "react-router-dom";
+import { StockSource } from "../redux/StockSource";
 
-export default function NavigationView({ balance, name }) {
+export default function NavigationView({ balance, name, search }) {
+  const [keywords, setKeywords] = useState("");
   return (
     <Navbar fixed="top" bg="dark" variant="dark">
       <Link to="/">
@@ -20,14 +22,29 @@ export default function NavigationView({ balance, name }) {
           <Button variant="dark">Your stock</Button>
         </Link>
         <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">Search</Button>
+          <FormControl
+            type="text"
+            placeholder="Search"
+            className="mr-sm-2"
+            value={keywords}
+            onChange={(event) => setKeywords(event.target.value)}
+          />
+          <Link to="search">
+            <Button
+              variant="outline-info"
+              onClick={() => {
+                search(keywords);
+              }}
+            >
+              Search
+            </Button>
+          </Link>
         </Form>
       </Nav>
       <Nav>
         <Navbar.Text>
           Signed in as {name} <br />
-          Balance: {balance}$
+          Balance: {balance.toFixed(2)}$
         </Navbar.Text>
         <Nav.Link href="/" onClick={() => auth.signOut()}>
           {" "}

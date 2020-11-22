@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import firebase, { auth, db } from "../firebase.js";
 
 export default function RegisterView({ registerUser, createUser }) {
@@ -8,7 +8,6 @@ export default function RegisterView({ registerUser, createUser }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const form = document.querySelector("#register-name-form")
 
   return (
     <>
@@ -55,11 +54,17 @@ export default function RegisterView({ registerUser, createUser }) {
                 register(name, email, password);
               }}
             >
-              Register
+              Sign Up
             </Button>
           </Form>
         </Card.Body>
       </Card>
+      <div class="signupText">
+        Already have an account?{""}
+        <Link class="signupLink" to="/">
+          Log In
+        </Link>
+      </div>
     </>
   );
 
@@ -69,12 +74,9 @@ export default function RegisterView({ registerUser, createUser }) {
       createUser(name);
       registerUser();
       history.push("/");
-      //return auth.currentUser.updateProfile({ displayName: name });
     } catch (error) {
       alert(error.message);
     }
   }
 }
-
-//.then(userCredential => firestore.collection('users').{userCredential}.user.uid, name)
 

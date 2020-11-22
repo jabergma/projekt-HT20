@@ -46,12 +46,10 @@ export default function LoginView({ loginUser }) {
           </Form>
         </Card.Body>
       </Card>
-
-      <Link to="/register">
-        <Button variant="primary" type="submit">
-          Register
-        </Button>
-      </Link>
+      <div class="signupText">
+        Need an account?{""}
+        <Link class="signupLink" to="/register">Sign Up</Link>
+      </div>
     </>
   );
 

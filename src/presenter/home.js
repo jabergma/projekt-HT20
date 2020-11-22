@@ -1,5 +1,5 @@
 import React from "react";
-import HomeView from "../views/homeView.js";
+import HomeView from "../views/HomeView.js";
 import { useSelector, useDispatch } from "react-redux";
 import firebase, { firestore, auth } from "../firebase.js";
 

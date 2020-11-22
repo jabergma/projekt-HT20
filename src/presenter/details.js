@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import DetailsView from "../views/detailsView";
+import DetailsView from "../views/DetailsView.js";
 import { useSelector, useDispatch } from "react-redux";
 import { StockSource } from "../redux/StockSource";
 import firebase, { firestore, auth } from "../firebase.js";
@@ -22,21 +22,27 @@ export default function Details() {
   const [data, error] = usePromise(promise);
 
   function setSell(amount) {
+    const tempBalance = balance*100;
+    const tempAmount = amount*100;
+    const newBalance = (tempBalance + tempAmount) / 100;
     firestore
       .collection("users")
       .doc(auth.currentUser.uid)
       .update({
-        balance: balance + amount,
+        balance: newBalance,
       });
     dispatch({ type: "SELL", payload: amount });
   }
 
   function setBuy(amount) {
+    const tempBalance = balance*100;
+    const tempAmount = amount*100;
+    const newBalance = (tempBalance - tempAmount) / 100;
     firestore
       .collection("users")
       .doc(auth.currentUser.uid)
       .update({
-        balance: balance - amount,
+        balance: newBalance,
       });
     dispatch({ type: "SELL", payload: amount });
   }

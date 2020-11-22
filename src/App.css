@@ -23,9 +23,25 @@
   margin-bottom: 4vh;
 }
 
+.stockifyHeader{
+  top: -200px;
+  text-align: center;
+  justify-content: flex-start;
+}
+
+.signupText {
+  margin-top: 10px;
+  text-align: center;
+}
+.signupLink{
+  margin-left: 4px;
+  font-weight: bold;
+}
+
 .loginContainer{
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   min-height: 100vh;
 }

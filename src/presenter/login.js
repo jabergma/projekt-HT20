@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginView from "../views/loginView.js";
+import LoginView from "../views/LoginView.js";
 import { useSelector, useDispatch } from "react-redux";
 import { LOGIN } from "../redux/types.js";
 import firebase, { firestore, auth } from "../firebase.js";

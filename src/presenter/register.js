@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterView from "../views/registerView.js";
+import RegisterView from "../views/RegisterView.js";
 import { useSelector, useDispatch } from "react-redux";
 import { LOGIN } from "../redux/types.js";
 import { firestore, auth } from "../firebase.js";
