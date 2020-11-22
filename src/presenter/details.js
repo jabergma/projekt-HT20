@@ -1,11 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import DetailsView from "../views/detailsView";
 import { useSelector, useDispatch } from "react-redux";
+import { StockSource } from "../redux/StockSource";
 import firebase, { firestore, auth } from "../firebase.js";
+import usePromise from "./usePromise.js"
+import promiseNoData from "../views/promiseNoData.js"
 
 export default function Details() {
   const balance = useSelector((state) => state.balance);
+  const currentStock = useSelector((state) => state.currentStock);
+  const [promise, setPromise] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setPromise(currentStock && StockSource.getStockDailyDetails(currentStock));
+    return () => {
+      Promise.resolve(currentStock && StockSource.getStockDailyDetails(currentStock));
+    }
+  }, [currentStock]);
+
+  const [data, error] = usePromise(promise);
 
   function setSell(amount) {
     firestore
@@ -28,23 +42,12 @@ export default function Details() {
   }
 
   return (
+    promiseNoData(promise, data, error) ||
     <DetailsView
+      currentStock={data}
       balance={balance}
       sell={(amount) => setSell(amount)}
       buy={(amount) => setBuy(amount)}
     />
   );
 }
-
-//setBalance={(trade, amount) => dispatch({ type: trade, payload: amount })}
-//.where("uid", "==", auth.currentUser.uid)
-
-/* function setSell(amount) {
-        firestore
-          .collection("users")
-          .doc(auth.currentUser.uid)
-          .update({
-            balance: balance + amount,
-          });
-        dispatch({ type: "SELL", payload: amount });
-      }*/

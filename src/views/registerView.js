@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import firebase, { auth, db } from "../firebase.js";
 
 export default function RegisterView({ registerUser, createUser }) {
@@ -69,7 +69,7 @@ export default function RegisterView({ registerUser, createUser }) {
       createUser(name);
       registerUser();
       history.push("/");
-      return auth.currentUser.updateProfile({ displayName: name });
+      //return auth.currentUser.updateProfile({ displayName: name });
     } catch (error) {
       alert(error.message);
     }

@@ -14,7 +14,6 @@ export default function Login() {
       querySnapshot.forEach((doc) => {
         doc.data();
         if (doc.data().uid === auth.currentUser.uid) {
-            console.log(doc.data().name)
           dispatch({
             type: LOGIN,
             payload: {
