@@ -9,7 +9,8 @@ import { BUY, SELL, LOGIN } from "./types.js";
 
 const initialState = {
   user: undefined,
-  balance: 1000,
+  balance: undefined,
+  uid: undefined,
 };
 
 export const store = createStore(stockReducer, initialState);
@@ -21,7 +22,7 @@ function stockReducer(state, { type, payload }) {
     case "SELL":
       return { ...state, balance: state.balance + payload };
     case LOGIN:
-      return { ...state, user: payload };
+      return { ...state, user: payload.name, balance: payload.balance, uid: payload.uid };
     default:
       return state;
   }

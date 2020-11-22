@@ -1,7 +1,7 @@
 import React from "react";
 import { StockSource } from "../redux/StockSource";
 import { Link } from "react-router-dom";
-import firebase, { firestore, auth} from "../firebase.js";
+import firebase, { firestore, auth } from "../firebase.js";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function HomeView({ balance }) {
@@ -14,29 +14,10 @@ export default function HomeView({ balance }) {
             IBM
           </button>
         </Link>
-        <div><button onClick={() => UserBalance()}>get balance</button></div>
+        <div>
+          <button>asd</button>
+        </div>
       </div>
     </div>
   );
-}
-
-function SignIn() {
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  };
-  return <button onClick={signInWithGoogle}>Sign In With Google</button>;
-}
-
-
-
-
-function UserBalance() {
-  const balansRef = firestore.collection('users')
-  balansRef.onSnapshot((querySnapshot) => {const items = [];
-  querySnapshot.forEach((doc) => {
-    items.push(doc.data());
-  });
-  console.log(items);
-});
 }
