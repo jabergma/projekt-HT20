@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { LOGIN } from "../redux/types.js";
 import firebase, { firestore, auth } from "../firebase.js";
 
+
 export default function Login() {
   const dispatch = useDispatch();
 
-  function setLogin() {
+  function setUser() {
     const balansRef = firestore.collection("users");
     balansRef.onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -27,5 +28,5 @@ export default function Login() {
     });
   }
 
-  return <LoginView loginUser={setLogin} />;
+  return <LoginView loginUser={setUser} />;
 }

@@ -3,11 +3,12 @@ import { Form, Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import firebase, { auth, db } from "../firebase.js";
 
-export default function RegisterView({setUser, setBalance, balance}) {
+export default function RegisterView({ registerUser, createUser }) {
   const history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const form = document.querySelector("#register-name-form")
 
   return (
     <>
@@ -18,6 +19,7 @@ export default function RegisterView({setUser, setBalance, balance}) {
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
+                id="register-name-form"
                 placeholder="Jane Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -63,8 +65,9 @@ export default function RegisterView({setUser, setBalance, balance}) {
 
   async function register(name, email, password) {
     try {
-      await auth.createUserWithEmailAndPassword(email, password)
-      setUser("uid");
+      await auth.createUserWithEmailAndPassword(email, password);
+      createUser(name);
+      registerUser();
       history.push("/");
       return auth.currentUser.updateProfile({ displayName: name });
     } catch (error) {
@@ -73,6 +76,5 @@ export default function RegisterView({setUser, setBalance, balance}) {
   }
 }
 
-
-
 //.then(userCredential => firestore.collection('users').{userCredential}.user.uid, name)
+

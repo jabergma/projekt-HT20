@@ -9,7 +9,7 @@ import { BUY, SELL, LOGIN } from "./types.js";
 
 const initialState = {
   user: undefined,
-  balance: 1000,
+  balance: undefined,
   uid: undefined,
 };
 
