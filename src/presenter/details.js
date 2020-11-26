@@ -5,12 +5,30 @@ import { StockSource } from "../redux/StockSource";
 import firebase, { firestore, auth } from "../firebase.js";
 import usePromise from "./usePromise.js"
 import promiseNoData from "../views/promiseNoData.js"
+import c3 from 'c3';
 
 export default function Details() {
   const balance = useSelector((state) => state.balance);
   const currentStock = useSelector((state) => state.currentStock);
   const [promise, setPromise] = useState(null);
   const dispatch = useDispatch();
+   
+  const Chart = () => {
+    React.useEffect(() => {
+      c3.generate({
+        bindto: "#chart",
+        data: {
+          columns: [
+            ["data1", 30, 200, 100, 400, 150, 250],
+            ["data2", 50, 20, 10, 40, 15, 25],
+          ],
+          type: "line",
+        },
+      });
+    }, []);
+    
+    return <div id="chart" />;
+  };
 
   useEffect(() => {
     setPromise(currentStock && StockSource.getStockDailyDetails(currentStock));
@@ -20,6 +38,8 @@ export default function Details() {
   }, [currentStock]);
 
   const [data, error] = usePromise(promise);
+
+
 
   function setSell(amount) {
     const tempBalance = balance*100;
@@ -46,6 +66,9 @@ export default function Details() {
       });
     dispatch({ type: "SELL", payload: amount });
   }
+
+
+
 
   return (
     promiseNoData(promise, data, error) ||
