@@ -54,3 +54,42 @@
 .App-link {
   color: #61dafb;
 }
+
+/* DetailView CSS PROPERTIES */
+.c3-tooltip td {
+  color: #222;
+}
+
+.stockListItem {
+  display: flex;
+  flex-direction: column; 
+}
+
+.stockList {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.DVstockTitle{
+  top: -200px;
+  text-align: center;
+  justify-content: flex-start;
+  font-size: 70px;
+  margin: 20px
+}
+
+.DVpriceStock{
+  text-align: center;
+  margin: 5px;
+  font-size: 30px;
+}
+
+.DVbuttons{
+  margin: 5px;
+  text-align: center;
+}
+
+.DVbuttons button{
+  margin: 5px;
+}

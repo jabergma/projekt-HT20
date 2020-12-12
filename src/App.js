@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Home from "./presenter/home.js";
 import Navigation from "./presenter/navigation.js";
@@ -36,7 +36,9 @@ function App() {
                 {stock ? <Details /> : <Redirect to="/" />}
               </Route>
               <Route path="/your-stock">
+              <div className="w-100" style={{ maxWidth: "600px" }}>
                 <Profile />
+                </div>
               </Route>
               <Route path="/search">
                 <Search />
