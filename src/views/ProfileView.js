@@ -1,10 +1,9 @@
-import React from 'react'
-import {StockSource} from "../redux/StockSource";
+import React from "react";
 
-export default function ProfileView() {
-    return (
-        <div>
-            Your stocks
-        </div>
-    )
+export default function ProfileView({ userStocks }) {
+  return (
+    <>
+      Stor kuk
+    </>
+  );
 }

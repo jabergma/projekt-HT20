@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Card } from "react-bootstrap";
+import { Form, Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import firebase, { auth, firestore } from "../firebase.js";
+import  { auth} from "../firebase.js";
 
 export default function LoginView({ loginUser }) {
   const history = useHistory();
@@ -48,7 +48,9 @@ export default function LoginView({ loginUser }) {
       </Card>
       <div class="signupText">
         Need an account?{""}
-        <Link class="signupLink" to="/register">Sign Up</Link>
+        <Link class="signupLink" to="/register">
+          Sign Up
+        </Link>
       </div>
     </>
   );

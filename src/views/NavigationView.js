@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
-import { firestore, auth } from "../firebase.js";
+import {auth } from "../firebase.js";
 import { Link } from "react-router-dom";
-import { StockSource } from "../redux/StockSource";
 
 export default function NavigationView({ balance, name, search }) {
   const [keywords, setKeywords] = useState("");
@@ -19,7 +18,7 @@ export default function NavigationView({ balance, name, search }) {
           <Button variant="dark">Details</Button>
         </Link>
         <Link to="/your-stock">
-          <Button variant="dark">Your stock</Button>
+          <Button variant="dark">XD</Button>
         </Link>
         <Form inline>
           <FormControl

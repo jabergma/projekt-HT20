@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import firebase, { auth, db } from "../firebase.js";
+import  { auth} from "../firebase.js";
 
 export default function RegisterView({ registerUser, createUser }) {
   const history = useHistory();
@@ -79,4 +79,3 @@ export default function RegisterView({ registerUser, createUser }) {
     }
   }
 }
-

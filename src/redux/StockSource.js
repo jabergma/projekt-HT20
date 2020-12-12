@@ -3,7 +3,7 @@ import {API_KEY } from "../apiConfig.js"
 //https://insomnia.rest/
 
 export const StockSource = {
-    apiCall(params) {
+    apiCall(params, API_KEY) {
       return (
         fetch(BASE_URL + params + API_KEY, {
           method: "GET",

@@ -8,6 +8,7 @@ import promiseNoData from "../views/promiseNoData.js";
 export default function Search() {
   const searchKeywords = useSelector((state) => state.searchKeywords);
   const [promise, setPromise] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setPromise(searchKeywords && StockSource.searchStock(searchKeywords));
@@ -21,6 +22,7 @@ export default function Search() {
   const [data, error] = usePromise(promise);
 
   return (
-    promiseNoData(promise, data, error) || <SearchView searchResults={data} />
+    promiseNoData(promise, data, error) || <SearchView searchResults={data} currentStock={(symbol, stockName) => 
+    dispatch({type: "SETSTOCK", payload: {symbol: symbol, stockName: stockName} })} />
   );
 }
