@@ -18,7 +18,7 @@ export default function Details() {
     setPromise(currentStock && StockSource.getStockDailyDetails(currentStock));
     return () => {
       Promise.resolve(
-         currentStock && StockSource.getStockDailyDetails(currentStock)
+        currentStock && StockSource.getStockDailyDetails(currentStock)
       );
     };
   }, [currentStock]);
@@ -26,17 +26,16 @@ export default function Details() {
   const [data, error] = usePromise(promise);
 
   function setSell(price, symbol) {
+    const nrStocksToSell = parseInt(document.getElementById("nrStocks").value, 10);
     const currentAmountIndex = userStocks.findIndex(
       (obj) => obj.symbol === symbol
     );
 
-  
-   
     firestore
       .collection(auth.currentUser.uid)
       .doc(symbol)
       .set({
-        amount: userStocks[currentAmountIndex].amount - 1,
+        amount: userStocks[currentAmountIndex].amount - nrStocksToSell,
         symbol: symbol,
         STname: stockName,
       });
@@ -45,25 +44,26 @@ export default function Details() {
       type: "SETUSERSTOCKS",
       payload: {
         old: userStocks[currentAmountIndex],
-        amount: userStocks[currentAmountIndex].amount - 1,
+        amount: userStocks[currentAmountIndex].amount - nrStocksToSell,
       },
     });
 
     const tempBalance = balance * 100;
-    const tempAmount = price * 100;
+    const tempAmount = price*100*nrStocksToSell;
     const newBalance = (tempBalance + tempAmount) / 100;
     firestore.collection("users").doc(auth.currentUser.uid).update({
       balance: newBalance,
     });
-
-    dispatch({ type: "SELL", payload: price });
+    dispatch({ type: "SELL", payload: {price, nrStocksToSell} });
   }
 
   function setBuy(price, symbol) {
     const currentAmountIndex = userStocks.findIndex((x) => x.symbol === symbol);
+    const nrStocksToBuy = parseInt(document.getElementById("nrStocks").value, 10);
+
     if (currentAmountIndex === -1) {
       firestore.collection(auth.currentUser.uid).doc(symbol).set({
-        amount: 1,
+        amount: nrStocksToBuy,
         symbol: symbol,
         STname: stockName,
       });
@@ -71,7 +71,7 @@ export default function Details() {
         type: "NEWUSERSTOCKS",
         payload: {
           symbol: symbol,
-          amount: 1,
+          amount: nrStocksToBuy,
           STname: stockName,
         },
       });
@@ -80,7 +80,7 @@ export default function Details() {
         .collection(auth.currentUser.uid)
         .doc(symbol)
         .set({
-          amount: userStocks[currentAmountIndex].amount + 1,
+          amount: userStocks[currentAmountIndex].amount + nrStocksToBuy,
           symbol: symbol,
           STname: stockName,
         });
@@ -89,26 +89,31 @@ export default function Details() {
         type: "SETUSERSTOCKS",
         payload: {
           old: userStocks[currentAmountIndex],
-          amount: userStocks[currentAmountIndex].amount + 1,
+          amount: userStocks[currentAmountIndex].amount + nrStocksToBuy,
         },
       });
     }
 
     const tempBalance = balance * 100;
-    const tempAmount = price * 100;
+    const tempAmount = price * 100 * nrStocksToBuy;
     const newBalance = (tempBalance - tempAmount) / 100;
     firestore.collection("users").doc(auth.currentUser.uid).update({
       balance: newBalance,
     });
-    dispatch({ type: "BUY", payload: price });
+
+    dispatch({ type: "BUY", payload: {price, nrStocksToBuy} });
   }
 
-  function findCurrentStockIndex(){
-    return(
-      userStocks.findIndex(
-        (obj) => obj.symbol === currentStock)
-    )
-  }
+  /*function findCurrentStockIndex() {
+    const numberOwnedIndex = userStocks.findIndex(
+      (obj) => (obj.symbol = currentStock)
+    );
+    if (userStocks.length === 0) {
+      return  userStocks[numberOwnedIndex]
+    } else {
+      return userStocks[numberOwnedIndex].amount;
+    }
+  }*/
 
   return (
     promiseNoData(promise, data, error) || (
@@ -117,8 +122,8 @@ export default function Details() {
         balance={balance}
         sell={(price, symbol) => setSell(price, symbol)}
         buy={(price, symbol) => setBuy(price, symbol)}
-        stockName = {stockName}
-        numberOwned = {userStocks[findCurrentStockIndex()].amount}
+        stockName={stockName}
+        userStocks={userStocks}
       />
     )
   );

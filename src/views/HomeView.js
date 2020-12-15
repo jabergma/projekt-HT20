@@ -8,6 +8,7 @@ export default function HomeView({ balance, currentStock, userStocks }) {
   return (
     <div>
     <div className="DVstockTitle">Your stocks </div>
+    <div className="DVstockTitle">Your balance: {balance.toFixed(2)}$ </div>
     <div>
       <ListGroup>
         <Link to="details">
@@ -20,8 +21,8 @@ export default function HomeView({ balance, currentStock, userStocks }) {
             eventKey={stock.symbol}
             onClick={() => currentStock(stock.symbol, stock.STname)}
           >
-            
-            {stock.amount}  {stock.STname}  <div className="stockListItem">{stock.symbol}</div> 
+            {stock.STname}
+            <div>Number of stocks: {stock.amount}</div>
           </ListGroup.Item>
         ))}
         </Link>
@@ -32,7 +33,7 @@ export default function HomeView({ balance, currentStock, userStocks }) {
 }
 
 //<button onClick={() => currentStock("IBM")}>IBM</button>
-
+//<div className="stockListItem">{stock.symbol}</div> 
 
 
 /*

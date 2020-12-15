@@ -14,12 +14,6 @@ export default function NavigationView({ balance, name, search }) {
         <Link to="/">
           <Button variant="dark">Home</Button>
         </Link>
-        <Link to="/details">
-          <Button variant="dark">Details</Button>
-        </Link>
-        <Link to="/your-stock">
-          <Button variant="dark">XD</Button>
-        </Link>
         <Form inline>
           <FormControl
             type="text"
@@ -52,4 +46,5 @@ export default function NavigationView({ balance, name, search }) {
       </Nav>
     </Navbar>
   );
+
 }

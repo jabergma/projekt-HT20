@@ -17,9 +17,9 @@ export const store = createStore(stockReducer, initialState);
 function stockReducer(state, { type, payload }) {
   switch (type) {
     case "BUY":
-      return { ...state, balance: state.balance - payload };
+      return { ...state, balance: state.balance - (payload.price*payload.nrStocksToBuy) };
     case "SELL":
-      return { ...state, balance: state.balance + payload };
+      return { ...state, balance: state.balance + (payload.price*payload.nrStocksToSell) };
     case LOGIN:
      return {
         ...state,
